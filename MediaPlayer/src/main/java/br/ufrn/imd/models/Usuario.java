@@ -4,9 +4,10 @@ public class Usuario {
   private String email;
   private int senha;
     
-    public UsuarioVIP(double codigo){
-        super();
-    }
+    public Usuario(String email, int senha){
+        this.email = email;
+        this.senha = senha;
+  }
     
     public String getEmail() {
         return email;

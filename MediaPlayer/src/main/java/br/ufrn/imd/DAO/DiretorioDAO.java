@@ -18,7 +18,6 @@ public class DiretorioDAO implements DAOI{
 
     public List<Diretorio> listar(Diretorio diretorio){
         // query
-        return usuario;
     }
 
     void deletar(Diretorio diretorio){

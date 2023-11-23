@@ -18,7 +18,6 @@ public class UsuarioDAO implements DAOI{
 
     public List<Usuario> listar(Usuario usuario){
         // query
-        return usuario;
     }
 
     void deletar(Usuario usuario){

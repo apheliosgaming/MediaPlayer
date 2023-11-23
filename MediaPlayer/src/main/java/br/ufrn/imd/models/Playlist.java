@@ -1,6 +1,7 @@
 package br.ufrn.imd.models;
 
 import java.util.ArrayList;
+import br.ufrn.imd.models.Musica;
 
 public class Playlist {
     private String nome;

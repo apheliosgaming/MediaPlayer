@@ -29,7 +29,7 @@ public class UsuarioDAO implements DAOI{
         // query
     }
 
-    // Metódo próprio de usuário, serve para a autenticação no login
+    // Método próprio de usuário, serve para a autenticação no login
     void autenticar(String email, String senha){
         // autenticar
     }

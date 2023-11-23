@@ -1,31 +1,30 @@
 package br.ufrn.imd.DAO;
 
-import br.ufrn.imd.models.Playlist;
+import br.ufrn.imd.models.Musica;
 
 import java.sql.Connection;
 import java.util.List;
 
-public class PlaylistDAO implements DAOI{
+public class MusicaDAO implements DAOI {
     private Connection connection; // Guarda a conexão com o banco
 
-    public playlistDAO(){
+    public MusicaDAO(){
         //fazer conexão com o banco
     }
 
-    public Playlist getById(int id){
+    public Musica getById(int id){
         // query
     }
 
-    public List<Playlist> listar(Playlist playlist){
+    public List<Musica> listar(Musica musica){
         // query
     }
 
-    public void deletar(Playlist playlist){
+    public void deletar(Musica musica){
         // query
     }
 
-    void inserir(Playlist playlist){
+    void inserir(Musica musica){
         //query
     }
-
 }

@@ -4,6 +4,7 @@ import br.ufrn.imd.models.Playlist;
 
 public class UsuarioVIP extends Usuario{
     private double codigo;
+    private Playlist playlist;
     
     public UsuarioVIP(double codigo){
         super();
@@ -17,5 +18,10 @@ public class UsuarioVIP extends Usuario{
   public void setCodigo(double codigo) {
         this.codigo = codigo;
   }
-    
+    public Playlist getPlaylist(){
+        
 }
+    public void setPlaylist(Playlist playlist) {
+        
+  }
+    

@@ -6,7 +6,7 @@ public class Playlist {
     private String nome;
     private ArrayList<Musica> musicas;
     
-    public Playlist(String nome, ) {
+    public Playlist(String nome) {
         this.nome = nome;
         this.musicas = new ArrayList<Musica>();
     }

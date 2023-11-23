@@ -11,11 +11,11 @@ public class UsuarioVIP extends Usuario{
     }
     
     public double getCodigo() {
-    return codigo;
+        return codigo;
   }
 
   public void setCodigo(double codigo) {
-    this.codigo = codigo;
+        this.codigo = codigo;
   }
     
 }

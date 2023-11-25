@@ -8,9 +8,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe que implementa a interface DAOI para manipulação de objetos Usuario no banco de dados.
+ */
 public class UsuarioDAO implements DAOI<Usuario>{
-    private Connection connection; // Guarda a conexão com o banco
+    private Connection connection;
 
+    /**
+     * Construtor da classe que estabelece a conexão com o banco de dados SQLite.
+     */
     public UsuarioDAO(){
         String jdbcUrl = "jdbc:sqlite:mediaplayer.db";
         try {
@@ -22,6 +28,12 @@ public class UsuarioDAO implements DAOI<Usuario>{
         }
     }
 
+    /**
+     * Método para criar um novo usuário no banco de dados.
+     *
+     * @param usuario O objeto Usuario a ser criado.
+     * @return true se a criação for bem-sucedida, false caso contrário.
+     */
     @Override
     public boolean create(Usuario usuario){
         String sql = "INSERT INTO usuarios(email, senha, username, vip) VALUES(?,?,?,?)";
@@ -48,6 +60,12 @@ public class UsuarioDAO implements DAOI<Usuario>{
         }
     }
 
+    /**
+     * Método para obter um usuário pelo ID no banco de dados.
+     *
+     * @param id O ID do usuário a ser recuperado.
+     * @return Um objeto Usuario ou UsuarioVIP se encontrado, ou null se não encontrado.
+     */
     @Override
     public Usuario getById(int id){
         String sql = "SELECT * FROM usuarios WHERE usuario_id = ?";
@@ -73,6 +91,11 @@ public class UsuarioDAO implements DAOI<Usuario>{
         return null;
     }
 
+    /**
+     * Método para obter todos os usuários do banco de dados.
+     *
+     * @return Uma lista de objetos Usuario.
+     */
     @Override
     public List<Usuario> getAll(){
         String sql = "SELECT * FROM usuarios";
@@ -98,6 +121,12 @@ public class UsuarioDAO implements DAOI<Usuario>{
         return usuarios;
     }
 
+    /**
+     * Método para atualizar um usuário no banco de dados.
+     *
+     * @param usuario O objeto Usuario a ser atualizado.
+     * @return true se a atualização for bem-sucedida, false caso contrário.
+     */
     @Override
     public boolean update(Usuario usuario){
         String sql = "UPDATE usuarios SET username=?, email=?, senha=?, vip=? WHERE usuario_id=?";
@@ -120,6 +149,12 @@ public class UsuarioDAO implements DAOI<Usuario>{
         }
     }
 
+    /**
+     * Método para excluir um usuário do banco de dados pelo ID.
+     *
+     * @param id O ID do usuário a ser excluído.
+     * @return true se a exclusão for bem-sucedida, false caso contrário.
+     */
     @Override
     public boolean delete(int id){
         String sql = "DELETE FROM usuarios WHERE usuario_id=?";
@@ -134,7 +169,13 @@ public class UsuarioDAO implements DAOI<Usuario>{
         }
     }
 
-    // Método próprio de usuário, serve para a autenticação no login
+    /**
+     * Método específico de usuário para autenticação no login.
+     *
+     * @param email O email do usuário.
+     * @param senha A senha do usuário.
+     * @return true se a autenticação for bem-sucedida, false caso contrário.
+     */
     public boolean autenticar(String email, String senha){
         String sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?";
         try{

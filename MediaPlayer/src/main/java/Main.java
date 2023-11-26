@@ -1,44 +1,51 @@
+import br.ufrn.imd.DAO.PlaylistDAO;
 import br.ufrn.imd.DAO.UsuarioDAO;
+import br.ufrn.imd.models.Playlist;
 import br.ufrn.imd.models.Usuario;
 import br.ufrn.imd.models.UsuarioVIP;
 
 public class Main {
     public static void main(String[] args){
         UsuarioDAO udao = new UsuarioDAO();
-//        Usuario u1 = new Usuario("usuariotest", "test1@mail.com", "12345");
-//        UsuarioVIP u2 = new UsuarioVIP("vipvipvip", "vip2@mail.com", "vip1235", 2);
+        PlaylistDAO pdao = new PlaylistDAO();
 
-        UsuarioVIP user = new UsuarioVIP("joao", "joao@gmail.com", "password", 0);
+        //UsuarioVIP user = new UsuarioVIP("joao", "joao@gmail.com", "password", 0);
 
-        udao.create(user);
+//        Usuario u1= udao.getById(5);
+//        System.out.println(u1.getId());
+        Playlist pc = new Playlist(0,"Natal", (UsuarioVIP) udao.getById(4));
 
-//        System.out.println(u1.getUsername());
-//        System.out.println(u2.getUsername());
-        //udao.create(u1);
-        //udao.create(u2);
+        Playlist p1 = pdao.getById(3);
+        System.out.println("Nome: " + p1.getNome());
 
-//        System.out.println(udao.getById(3).getUsername());
-//        System.out.println(udao.getById(3) instanceof UsuarioVIP);
 
-        //Usuario u1= udao.getById(2);
 
-        //u1.setUsername("mariasilva");
+        p1.setDono((UsuarioVIP) udao.getById(4));
 
-        //udao.update(u1);
+        pdao.update(p1);
 
-        //udao.delete(u1.getId());
-
-        for (Usuario u : udao.getAll()){
-            System.out.println(u.getUsername());
-            System.out.println(u instanceof UsuarioVIP);
+        for (Playlist p : pdao.getAll()){
+            System.out.println(p.getNome());
+            if (p.getDono() != null){
+                System.out.println(p.getDono().getUsername());
+            }
             System.out.println("-----------");
         }
 
-        if(udao.autenticar("test1@mail.com","1234")){
-            System.out.println("Logado");
-        } else {
-            System.out.println("Senha ou email incorreto");
+        pdao.delete(1);
+        pdao.delete(2);
+
+        System.out.println("Playlists de " + udao.getById(4).getUsername());
+        for (Playlist pu : pdao.getAllUserPlaylist((UsuarioVIP) udao.getById(4))){
+            System.out.println(pu.getNome());
         }
+
+
+//        if(udao.autenticar("test1@mail.com","1234")){
+//            System.out.println("Logado");
+//        } else {
+//            System.out.println("Senha ou email incorreto");
+//        }
 
     }
 }

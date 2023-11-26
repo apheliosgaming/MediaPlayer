@@ -8,8 +8,8 @@ public class UsuarioVIP extends Usuario {
     private double codigo;
     private List<Playlist> playlists;
 
-    public UsuarioVIP(String username, String email, String senha, double codigo) {
-        super(username, email, senha);
+    public UsuarioVIP(int id, String username, String email, String senha, double codigo) {
+        super(id, username, email, senha);
         this.codigo = codigo;
     }
 

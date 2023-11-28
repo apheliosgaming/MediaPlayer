@@ -1,5 +1,7 @@
+import br.ufrn.imd.DAO.MusicaDAO;
 import br.ufrn.imd.DAO.PlaylistDAO;
 import br.ufrn.imd.DAO.UsuarioDAO;
+import br.ufrn.imd.models.Musica;
 import br.ufrn.imd.models.Playlist;
 import br.ufrn.imd.models.Usuario;
 import br.ufrn.imd.models.UsuarioVIP;
@@ -8,6 +10,8 @@ public class Main {
     public static void main(String[] args){
         UsuarioDAO udao = new UsuarioDAO();
         PlaylistDAO pdao = new PlaylistDAO();
+        MusicaDAO mdao = new MusicaDAO();
+        MusicaDAO mdao2 = new MusicaDAO();
 
         //UsuarioVIP user = new UsuarioVIP("joao", "joao@gmail.com", "password", 0);
 
@@ -46,6 +50,29 @@ public class Main {
 //        } else {
 //            System.out.println("Senha ou email incorreto");
 //        }
+
+        // MUSICA DAO
+        //Musica m1 = new Musica(0, "titulo3", "artista3", 1.9, "musicas/m3");
+        //Musica m2 = new Musica(0, "titulo4", "artista4", 3.1, "musicas/m4");
+
+        //mdao.create(m1);
+        //mdao2.create(m2);
+
+        System.out.println(mdao.getById(1).getTitulo());
+        System.out.println(mdao2.getById(2).getTitulo());
+
+        for (Musica m : mdao.getAll()){
+            System.out.println(m.getArtista());
+        }
+
+        Musica m1 = mdao.getById(3);
+        Musica m2 = mdao.getById(4);
+        m1.setTitulo("titulo3");
+        m2.setArtista("artista_novo");
+        mdao.update(m1);
+        mdao2.update(m2);
+
+        mdao.delete(4);
 
     }
 }

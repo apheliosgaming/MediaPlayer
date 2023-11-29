@@ -1,10 +1,8 @@
+import br.ufrn.imd.DAO.DiretorioDAO;
 import br.ufrn.imd.DAO.MusicaDAO;
 import br.ufrn.imd.DAO.PlaylistDAO;
 import br.ufrn.imd.DAO.UsuarioDAO;
-import br.ufrn.imd.models.Musica;
-import br.ufrn.imd.models.Playlist;
-import br.ufrn.imd.models.Usuario;
-import br.ufrn.imd.models.UsuarioVIP;
+import br.ufrn.imd.models.*;
 
 public class Main {
     public static void main(String[] args){
@@ -13,7 +11,7 @@ public class Main {
         MusicaDAO mdao = new MusicaDAO();
         MusicaDAO mdao2 = new MusicaDAO();
 
-        //UsuarioVIP user = new UsuarioVIP("joao", "joao@gmail.com", "password", 0);
+        UsuarioVIP user = new UsuarioVIP(0,"joao", "joao@gmail.com", "password", 0);
 
 //        Usuario u1= udao.getById(5);
 //        System.out.println(u1.getId());
@@ -66,13 +64,40 @@ public class Main {
         }
 
         Musica m1 = mdao.getById(3);
-        Musica m2 = mdao.getById(4);
+        //Musica m2 = mdao.getById(4);
         m1.setTitulo("titulo3");
-        m2.setArtista("artista_novo");
+        //m2.setArtista("artista_novo");
         mdao.update(m1);
-        mdao2.update(m2);
+        //mdao2.update(m2);
 
         mdao.delete(4);
 
+        // DIRETORIO DAO
+        DiretorioDAO ddao = new DiretorioDAO();
+        Usuario dono = udao.getById(3);
+        Diretorio d = new Diretorio(0, user, "Dir1", "caminho/dir");
+//        if(ddao.create(d)){
+//            System.out.println("Diretorio adicionado");
+//        } else {
+//            System.out.println("Erro ao adicionar diretorio");
+//        }
+
+        Diretorio dir1 = ddao.getById(1);
+
+        for (Diretorio dir : ddao.getAll()){
+            System.out.println(dir.getCaminho());
+        }
+
+        dir1.setNome("Dir2");
+        dir1.setDono(dono);
+        dir1.setCaminho("caminho/dir2");
+
+        //ddao.update(dir1);
+
+        ddao.delete(3);
+
+        for (Diretorio dir2 : ddao.getAllUserDirectories(dono)){
+            System.out.println(dir2.getNome());
+        }
     }
 }

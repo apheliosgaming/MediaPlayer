@@ -1,5 +1,6 @@
 package br.ufrn.imd.DAO;
 
+import br.ufrn.imd.models.Musica;
 import br.ufrn.imd.models.Playlist;
 import br.ufrn.imd.models.Usuario;
 import br.ufrn.imd.models.UsuarioVIP;
@@ -168,5 +169,49 @@ public class PlaylistDAO implements DAOI<Playlist>{
             e.printStackTrace();
         }
         return playlists;
+    }
+
+    /**
+     * Método para adicionar musicas a uma playlist.
+     *
+     * @param musica A musica que será adicionada.
+     * @param playlist A playlist que vai receber a musica.
+     * @return true se a adição for bem-sucedida, false caso contrário.
+     */
+    public boolean addMusicToPlaylist(Musica musica, Playlist playlist){
+        String sql = "INSERT INTO playlist_musica(playlist_id, musica_id) VALUES(?,?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)){
+            stmt.setInt(1, playlist.getId());
+            stmt.setInt(2, musica.getId());
+            stmt.execute();
+            return true;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Método para obter todos as musicas de uma playlist.
+     *
+     * @param playlist A playlist que será acessada.
+     * @return Uma lista de objetos Musica.
+     */
+    public List<Musica> getPlaylistMusics(Playlist playlist){
+        String sql = "SELECT musica_id FROM playlist_musica WHERE playlist_id=?";
+        List<Musica> musicas = new ArrayList<>();
+        try (PreparedStatement stmt = connection.prepareStatement(sql)){
+            stmt.setInt(1, playlist.getId());
+            ResultSet resultado = stmt.executeQuery();
+            MusicaDAO mdao = new MusicaDAO();
+            while (resultado.next()){
+                int idMusica = resultado.getInt("musica_id");
+                Musica musica = mdao.getById(idMusica);
+                musicas.add(musica);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return musicas;
     }
 }

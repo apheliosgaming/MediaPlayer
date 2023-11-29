@@ -99,5 +99,15 @@ public class Main {
         for (Diretorio dir2 : ddao.getAllUserDirectories(dono)){
             System.out.println(dir2.getNome());
         }
+
+        // Adicionar musica a playlist
+        Playlist playlist = pdao.getById(3);
+        Musica musica = mdao.getById(2);
+        //pdao.addMusicToPlaylist(musica, playlist);
+
+        System.out.println("Musicas da playlist:");
+        for (Musica mus : pdao.getPlaylistMusics(playlist)){
+            System.out.println(mus.getTitulo());
+        }
     }
 }

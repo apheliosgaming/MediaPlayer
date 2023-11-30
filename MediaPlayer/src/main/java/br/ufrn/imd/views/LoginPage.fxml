@@ -10,14 +10,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.LoginController">
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #9870FC;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="GuyHeadphonesLogin" fitHeight="224.0" fitWidth="211.0" layoutX="12.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Downloads/01%20Afro%20Man%20Plating%20Guitar%20Accoustic.png" />
+                  <Image url="@util/01AfroManPlatingGuitarAccoustic.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="86.0" prefHeight="17.0" prefWidth="219.0" text="Media Player">
@@ -37,7 +36,7 @@
             </Label>
             <ImageView fx:id="IconHeadPhone" fitHeight="19.0" fitWidth="19.0" layoutX="15.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Downloads/Vector.png" />
+                  <Image url="@util/Vector.png" />
                </image>
             </ImageView>
          </children>
@@ -49,7 +48,7 @@
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="292.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="97.0" prefHeight="17.0" prefWidth="219.0" text="Login">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="85.0" prefHeight="17.0" prefWidth="219.0" text="Login">
                <font>
                   <Font size="18.0" />
                </font>
@@ -66,13 +65,14 @@
             </Label>
             <TextField fx:id="usernameField" layoutX="87.0" layoutY="146.0" prefHeight="0.0" prefWidth="152.0" />
             <PasswordField fx:id="passwordField" layoutX="87.0" layoutY="216.0" prefHeight="0.0" prefWidth="152.0" />
-            <Button fx:id="ConfirmButtom" layoutX="22.0" layoutY="271.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="228.0" style="-fx-background-color: #ADD1FC;" text="Confirm" textFill="#545454" />
-            <Button fx:id="RegisterButtom" layoutX="22.0" layoutY="334.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="228.0" style="-fx-background-color: #ADD1FC;" text="Register" textFill="#545454" />
+            <Button fx:id="ConfirmButton" layoutX="22.0" layoutY="271.0" mnemonicParsing="false" onAction="#ConfirmButtonOnAction" prefHeight="30.0" prefWidth="228.0" style="-fx-background-color: #ADD1FC;" text="Confirm" textFill="#545454" />
+            <Button fx:id="RegisterButton" layoutX="22.0" layoutY="334.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="228.0" style="-fx-background-color: #ADD1FC;" text="Register" textFill="#545454" />
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="97.0" layoutY="307.0" prefHeight="20.0" prefWidth="79.0" text="or">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <Label fx:id="WarningTextLogin" alignment="CENTER" layoutX="74.0" layoutY="118.0" prefHeight="17.0" prefWidth="144.0" style="-fx-text-fill: #eb5e5e;" textFill="#da5050" wrapText="true" />
          </children>
       </AnchorPane>
    </right>

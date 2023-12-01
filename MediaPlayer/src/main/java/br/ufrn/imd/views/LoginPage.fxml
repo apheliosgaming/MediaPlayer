@@ -48,12 +48,12 @@
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="292.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="85.0" prefHeight="17.0" prefWidth="219.0" text="Login">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="94.0" prefHeight="17.0" prefWidth="219.0" text="Login">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="149.0" prefHeight="20.0" prefWidth="79.0" text="Username">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="161.0" prefHeight="20.0" prefWidth="79.0" text="Username">
                <font>
                   <Font size="14.0" />
                </font>
@@ -63,16 +63,12 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameField" layoutX="87.0" layoutY="146.0" prefHeight="0.0" prefWidth="152.0" />
+            <TextField fx:id="usernameField" layoutX="87.0" layoutY="159.0" prefHeight="0.0" prefWidth="152.0" />
             <PasswordField fx:id="passwordField" layoutX="87.0" layoutY="216.0" prefHeight="0.0" prefWidth="152.0" />
-            <Button fx:id="ConfirmButton" layoutX="22.0" layoutY="271.0" mnemonicParsing="false" onAction="#ConfirmButtonOnAction" prefHeight="30.0" prefWidth="228.0" style="-fx-background-color: #ADD1FC;" text="Confirm" textFill="#545454" />
-            <Button fx:id="RegisterButton" layoutX="22.0" layoutY="334.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="228.0" style="-fx-background-color: #ADD1FC;" text="Register" textFill="#545454" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="97.0" layoutY="307.0" prefHeight="20.0" prefWidth="79.0" text="or">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="WarningTextLogin" alignment="CENTER" layoutX="74.0" layoutY="118.0" prefHeight="17.0" prefWidth="144.0" style="-fx-text-fill: #eb5e5e;" textFill="#da5050" wrapText="true" />
+            <Button fx:id="ConfirmButton" layoutX="22.0" layoutY="271.0" mnemonicParsing="false" onAction="#ConfirmButtonOnAction" prefHeight="30.0" prefWidth="228.0" style="-fx-background-color: #ADD1FC; -fx-cursor: hand;" text="Confirm" textFill="#545454" />
+            <Button fx:id="RegisterButton" layoutX="148.0" layoutY="319.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Register" textFill="#9870fc" underline="true" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="58.0" layoutY="324.0" prefHeight="20.0" prefWidth="105.0" text="Not a member?" />
+            <Label fx:id="WarningTextLogin" alignment="CENTER" layoutX="74.0" layoutY="130.0" prefHeight="17.0" prefWidth="144.0" style="-fx-text-fill: #eb5e5e;" textFill="#da5050" wrapText="true" />
          </children>
       </AnchorPane>
    </right>

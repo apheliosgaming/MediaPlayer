@@ -39,16 +39,20 @@ public class LoginController implements Initializable {
 
     public void ConfirmButtonOnAction(){
         if(!usernameField.getText().isBlank() && !passwordField.getText().isBlank()){
-            WarningTextLogin.setText("Você logou!");
-            validaLogin();
+            ConfirmButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                  //  SceneAux.logInUser(actionEvent, usernameField.getText(), passwordField.getText());
+                    SceneAux.changeScene(actionEvent, "MainPage.fxml", "Media Player", usernameField.getText());
+                }
+            });
         }
         else{
             WarningTextLogin.setText("Insira um usuário e senha.");
         }
     }
     public void validaLogin(){
-        //Connection connection;
-        //parte do UsuarioDAO boto amanha XD
+        
     }
 
     @FXML
@@ -69,17 +73,9 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         RegisterButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
-                Parent root = null;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("RegistrationPage.fxml"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                stage.setTitle("Tela de Registro");
-                stage.setScene(new Scene(root, 520, 400));
-                stage.show();
+            public void handle(ActionEvent event) {
+                SceneAux.changeScene(event, "RegistrationPage.fxml", "Tela de Registro", null);
             }
         });
-    }}
+    }
+}

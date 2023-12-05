@@ -105,7 +105,6 @@ public class MainPageController implements Initializable {
             try {
                 media = new Media(path);
                 mediaPlayer = new MediaPlayer(media);
-                mediaView.setMediaPlayer(mediaPlayer);
                 mediaPlayer.play();
                 mediaPlayer.setVolume(0.5);
             } catch (Exception e){

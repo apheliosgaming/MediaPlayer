@@ -3,9 +3,25 @@ import br.ufrn.imd.DAO.MusicaDAO;
 import br.ufrn.imd.DAO.PlaylistDAO;
 import br.ufrn.imd.DAO.UsuarioDAO;
 import br.ufrn.imd.models.*;
+//
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
+//
 
-public class Main {
+public class Main extends Application{
+    @Override
+    public void start(Stage stage)  throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+        stage.setTitle("Tela de Login");
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+        }
     public static void main(String[] args){
+        //nao sei se o launch da problema aqui (no meu codigo nao tem nada no main)//
+        launch(args);
         UsuarioDAO udao = new UsuarioDAO();
         PlaylistDAO pdao = new PlaylistDAO();
         MusicaDAO mdao = new MusicaDAO();

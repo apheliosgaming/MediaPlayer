@@ -1,5 +1,7 @@
-package app;
+package br.ufrn.imd.controllers;
 
+import br.ufrn.imd.DAO.UsuarioDAO;
+import br.ufrn.imd.models.Usuario;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +54,15 @@ public class RegistrationController implements Initializable {
     @FXML
     public void ConfirmButtonOnAction() {
         if(!usernameField.getText().isBlank() && !passwordField.getText().isBlank() && !emailField.getText().isBlank()){
+            UsuarioDAO udao = new UsuarioDAO();
+            Usuario usuario = new Usuario(
+                    0,
+                    usernameField.getText(),
+                    emailField.getText(),
+                    passwordField.getText()
+            );
+            udao.create(usuario);
+
             WarningTextLogin.setText("Você se registrou!");
         }
         else{
@@ -67,7 +78,7 @@ public class RegistrationController implements Initializable {
             public void handle(ActionEvent actionEvent) {
                 Parent root = null;
                 try {
-                    root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+                    root = FXMLLoader.load(getClass().getResource("/LoginPage.fxml"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -58,7 +58,7 @@ public class SceneAux {
                 while(resultSet.next()) {
                     String userPassword = resultSet.getString("senha");
                     if(userPassword.equals(senha)) {
-                        changeScene(actionEvent, "MainPage.fxml", "Media Player", username);
+                        changeScene(actionEvent, "/MainPage.fxml", "Media Player", username);
                     } else{
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setContentText("Usuário ou senha incorretos.");

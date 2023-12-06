@@ -1,5 +1,6 @@
 package br.ufrn.imd.controllers;
 
+import br.ufrn.imd.DAO.UsuarioDAO;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,11 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
@@ -42,8 +40,16 @@ public class LoginController implements Initializable {
             ConfirmButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                  //  SceneAux.logInUser(actionEvent, usernameField.getText(), passwordField.getText());
-                    SceneAux.changeScene(actionEvent, "MainPage.fxml", "Media Player", usernameField.getText());
+                    UsuarioDAO udao = new UsuarioDAO();
+
+                    if (udao.autenticar(usernameField.getText(), passwordField.getText())){
+                        SceneAux.changeScene(actionEvent, "/MainPage.fxml", "Media Player", usernameField.getText());
+                    }
+                    else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setContentText("Usuário ou senha incorretos.");
+                        alert.show();
+                    }
                 }
             });
         }
@@ -74,7 +80,7 @@ public class LoginController implements Initializable {
         RegisterButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                SceneAux.changeScene(event, "RegistrationPage.fxml", "Tela de Registro", null);
+                SceneAux.changeScene(event, "/RegistrationPage.fxml", "Tela de Registro", null);
             }
         });
     }

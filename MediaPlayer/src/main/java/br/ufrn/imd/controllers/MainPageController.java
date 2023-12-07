@@ -1,5 +1,6 @@
 //package br.ufrn.imd.controllers;
-package com.kensoftph.javafxmedia;
+package br.ufrn.imd.controllers;
+//package com.kensoftph.javafxmedia;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -9,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +23,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
@@ -45,6 +48,10 @@ public class MainPageController implements Initializable {
 
     @FXML
     private Button buttonBackward;
+
+    @FXML
+    private Label LabelPlaylist;
+
 
     @FXML
     private Rectangle buttonControlMusic;
@@ -289,6 +296,8 @@ public class MainPageController implements Initializable {
         treeViewPlaylist.setEditable( true );
         TreeItem<String> newPlaylist = new TreeItem<> (td.getEditor().getText());
 
+        //LabelPlaylist.setText(td.getEditor().getText());
+
         //TreeItem<String> folha = new TreeItem<> ("DUO");
 
         root.getChildren().addAll(newPlaylist);
@@ -368,6 +377,15 @@ public class MainPageController implements Initializable {
             }
         } );
     }
+    private void handleMouseClicked(MouseEvent event) {
+        Node node = event.getPickResult().getIntersectedNode();
+        // Accept clicks only on node cells, and not on empty spaces of the TreeView
+        if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
+            String name = (String) ((TreeItem)treeViewPlaylist.getSelectionModel().getSelectedItem()).getValue();
+            System.out.println("Node click: " + name);
+            LabelPlaylist.setText(name);
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -394,6 +412,12 @@ public class MainPageController implements Initializable {
         //treeViewPlaylist.getSelectionModel().selectedItemProperty().addListener((observable, old F ));
         //TESTE
         ListViewDragAndDrop(musicList, playlistListView);
+
+        EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
+            handleMouseClicked(event);
+        };
+
+        treeViewPlaylist.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle);
 /*
         playlistListView.setItems(targetList);
         //playListView = new ListView<>(targetList);

@@ -1,5 +1,5 @@
-package br.ufrn.imd.controllers;
-//package com.kensoftph.javafxmedia;
+//package br.ufrn.imd.controllers;
+package com.kensoftph.javafxmedia;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -172,11 +172,11 @@ public class MainPageController implements Initializable {
     }
 
 
-    public void nextMedia(ActionEvent event, ListView<String> listView) {
+    public void nextMedia(ActionEvent event) {
         int indexAtual = musicList.getSelectionModel().getSelectedIndex();
         if (indexAtual < musicList.getHeight() - 1) {
             musicList.getSelectionModel().select(indexAtual + 1);
-            }
+        }
     }
 
 
@@ -249,9 +249,9 @@ public class MainPageController implements Initializable {
             items.add(path);
 
 
-                //} catch (Exception e){
-                //   e.printStackTrace();
-                // }
+            //} catch (Exception e){
+            //   e.printStackTrace();
+            // }
 
         }
         else{

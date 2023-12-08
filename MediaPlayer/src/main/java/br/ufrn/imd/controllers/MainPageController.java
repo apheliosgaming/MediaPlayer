@@ -233,13 +233,18 @@ public class MainPageController implements Initializable {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Selecione o diretório");
         File directory = directoryChooser.showDialog(null);
+        MusicaDAO mdao = new MusicaDAO();
 
         if(directory != null){
             File[] files = directory.listFiles();
             if(files != null){
                 for(File file : files) {
-                    System.out.println(file.toURI().toString());
-                    items.add(file.toURI().toString());
+                    //System.out.println(file.toURI().toString());
+                    path = file.toURI().toString();
+                    String titulo = file.getName();
+                    Musica musica = new Musica(0, usuario, titulo, 0, path);
+                    mdao.create(musica);
+                    items.add(path);
                 }
             }
         }
@@ -252,10 +257,10 @@ public class MainPageController implements Initializable {
         File file = fileChooser.showOpenDialog(null);
         if(file != null){
             path = file.toURI().toString();
-            //System.out.println(path);
-            //MusicaDAO mdao = new MusicaDAO();
-            //Musica musica = new Musica(0, )
-            //mdao.create()
+            MusicaDAO mdao = new MusicaDAO();
+            String titulo = file.getName();
+            Musica musica = new Musica(0, usuario, titulo, 0, path);
+            mdao.create(musica);
             items.add(path);
         }
         else{

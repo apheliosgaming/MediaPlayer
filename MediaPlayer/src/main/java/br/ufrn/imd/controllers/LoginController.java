@@ -1,6 +1,7 @@
 package br.ufrn.imd.controllers;
 
 import br.ufrn.imd.DAO.UsuarioDAO;
+import br.ufrn.imd.models.Usuario;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,13 +38,15 @@ public class LoginController implements Initializable {
 
     public void ConfirmButtonOnAction(){
         if(!usernameField.getText().isBlank() && !passwordField.getText().isBlank()){
+            String emailUsuario = usernameField.getText();
             ConfirmButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     UsuarioDAO udao = new UsuarioDAO();
-
+                    Usuario usuario = udao.getByEmail(emailUsuario);
+                    System.out.println(usuario.getUsername());
                     if (udao.autenticar(usernameField.getText(), passwordField.getText())){
-                        SceneAux.changeScene(actionEvent, "/MainPage.fxml", "Media Player", usernameField.getText());
+                        SceneAux.changeScene(actionEvent, "/MainPage.fxml", "Media Player", usuario);
                     }
                     else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);

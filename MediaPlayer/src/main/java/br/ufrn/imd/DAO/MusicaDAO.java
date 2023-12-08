@@ -1,8 +1,6 @@
 package br.ufrn.imd.DAO;
 
-import br.ufrn.imd.models.Musica;
-import br.ufrn.imd.models.Playlist;
-import br.ufrn.imd.models.UsuarioVIP;
+import br.ufrn.imd.models.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -36,10 +34,10 @@ public class MusicaDAO implements DAOI<Musica> {
      */
     @Override
     public boolean create(Musica musica) {
-        String sql = "INSERT INTO musicas(titulo, artista, duracao, caminho) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO musicas(titulo, dono, duracao, caminho) VALUES(?,?,?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)){
             stmt.setString(1, musica.getTitulo());
-            stmt.setString(2, musica.getArtista());
+            stmt.setInt(2, musica.getDono().getId());
             stmt.setDouble(3, musica.getDuracao());
             stmt.setString(4, musica.getCaminho());
 
@@ -63,14 +61,17 @@ public class MusicaDAO implements DAOI<Musica> {
         try (PreparedStatement stmt = connection.prepareStatement(sql)){
             stmt.setInt(1, id);
             ResultSet musica = stmt.executeQuery();
+            UsuarioDAO udao = new UsuarioDAO();
             while (musica.next()){
                 int idMusica = musica.getInt("musica_id");
                 String titulo = musica.getString("titulo");
-                String artista = musica.getString("artista");
+                int idDono = musica.getInt("dono");
                 double duracao = musica.getDouble("duracao");
                 String caminho = musica.getString("caminho");
 
-                return new Musica(idMusica, titulo, artista, duracao, caminho);
+                Usuario dono = udao.getById(idDono);
+
+                return new Musica(idMusica, dono, titulo, duracao, caminho);
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -89,14 +90,17 @@ public class MusicaDAO implements DAOI<Musica> {
         List<Musica> musicas = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(sql)){
             ResultSet resultado = stmt.executeQuery();
+            UsuarioDAO udao = new UsuarioDAO();
             while (resultado.next()){
                 int idMusica = resultado.getInt("musica_id");
                 String titulo = resultado.getString("titulo");
-                String artista = resultado.getString("artista");
+                int idDono = resultado.getInt("dono");
                 double duracao = resultado.getDouble("duracao");
                 String caminho = resultado.getString("caminho");
 
-                musicas.add(new Musica(idMusica, titulo, artista, duracao, caminho));
+                Usuario dono = udao.getById(idDono);
+
+                musicas.add(new Musica(idMusica, dono, titulo, duracao, caminho));
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -112,10 +116,10 @@ public class MusicaDAO implements DAOI<Musica> {
      */
     @Override
     public boolean update(Musica musica) {
-        String sql = "UPDATE musicas SET titulo=?, artista=?, duracao=?, caminho=? WHERE musica_id=?";
+        String sql = "UPDATE musicas SET titulo=?, dono=?, duracao=?, caminho=? WHERE musica_id=?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)){
             stmt.setString(1, musica.getTitulo());
-            stmt.setString(2, musica.getArtista());
+            stmt.setInt(2, musica.getDono().getId());
             stmt.setDouble(3, musica.getDuracao());
             stmt.setString(4, musica.getCaminho());
             stmt.setInt(5, musica.getId());
@@ -144,5 +148,35 @@ public class MusicaDAO implements DAOI<Musica> {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * Método para obter todos as musicas de um usuário.
+     *
+     * @param usuario O usuário dono da musica.
+     * @return Uma lista de objetos Musica.
+     */
+    public List<Musica> getAllUserMusics(Usuario usuario){
+        String sql = "SELECT * FROM musicas WHERE dono=?";
+        List<Musica> musicas = new ArrayList<>();
+        try (PreparedStatement stmt = connection.prepareStatement(sql)){
+            stmt.setInt(1, usuario.getId());
+            ResultSet resultado = stmt.executeQuery();
+            UsuarioDAO udao = new UsuarioDAO();
+            while (resultado.next()){
+                int idMusica = resultado.getInt("musica_id");
+                String titulo = resultado.getString("titulo");
+                int idDono = resultado.getInt("dono");
+                double duracao = resultado.getDouble("duracao");
+                String caminho = resultado.getString("caminho");
+
+                Usuario dono = udao.getById(idDono);
+
+                musicas.add(new Musica(idMusica, dono, titulo, duracao, caminho));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return musicas;
     }
 }

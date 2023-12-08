@@ -2,6 +2,10 @@
 package br.ufrn.imd.controllers;
 //package com.kensoftph.javafxmedia;
 
+import br.ufrn.imd.DAO.MusicaDAO;
+import br.ufrn.imd.DAO.UsuarioDAO;
+import br.ufrn.imd.models.Musica;
+import br.ufrn.imd.models.Usuario;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -110,6 +114,20 @@ public class MainPageController implements Initializable {
     private String songName;
     //private int atualIndex = -1;
 
+    Usuario usuario;
+
+    ObservableList<String> items = FXCollections.observableArrayList();
+    public void setUsuario(Usuario usuario){
+        this.usuario = usuario;
+        welcomeLabel.setText("Oi, " + usuario.getUsername() + "!");
+
+        MusicaDAO mdao = new MusicaDAO();
+        List<Musica> musicasDoUsuario = mdao.getAllUserMusics(usuario);
+        for (Musica musica : musicasDoUsuario){
+            items.add(musica.getCaminho());
+        }
+    }
+
     public void progressSliderOnAction(){
         mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
             @Override
@@ -210,7 +228,6 @@ public class MainPageController implements Initializable {
     public void cancelTimer(){
 
     }
-    ObservableList<String> items = FXCollections.observableArrayList();
 
     public void AddDirectoryMethod(){
         DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -234,32 +251,12 @@ public class MainPageController implements Initializable {
         fileChooser.setTitle("Selecione o arquivo da música");
         File file = fileChooser.showOpenDialog(null);
         if(file != null){
-
             path = file.toURI().toString();
-
-            //path = file.getName();
-            System.out.println(path);
-            /*
-            media = new Media(path);
-            mediaPlayer = new MediaPlayer(media);
-            progressSliderOnAction();
-                //mediaPlayer.play();
-                //TESTE
-
-             */
-            /*
-            musicList.setItems(items);
-            musicList.getSelectionModel().selectedItemProperty().addListener((observable, oldFile, newFile) -> {
-                mediaPlayer.play();
-            });
-            */
+            //System.out.println(path);
+            //MusicaDAO mdao = new MusicaDAO();
+            //Musica musica = new Musica(0, )
+            //mdao.create()
             items.add(path);
-
-
-            //} catch (Exception e){
-            //   e.printStackTrace();
-            // }
-
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -312,71 +309,67 @@ public class MainPageController implements Initializable {
     }
     ObservableList<String> targetList = FXCollections.observableArrayList();
 
-    public void userInfo(String username){
-        welcomeLabel.setText("Oi, " + username + "!");
-    }
-
-    public void ListViewDragAndDrop(ListView<String> listView, ListView<String> playListView){
-        playlistListView.setItems(targetList);
-        //playListView = new ListView<>(targetList);
-        //arrasta e coloca items da musicList na playlistListView
-        musicList.setCellFactory( new Callback<ListView<String>, ListCell<String>>()
-        {
-            @Override
-            public ListCell<String> call( ListView<String> param )
-            {
-                ListCell<String> listCell = new ListCell<String>()
-                {
-                    @Override
-                    protected void updateItem( String item, boolean empty )
-                    {
-                        super.updateItem( item, empty );
-                        setText( item );
-                    }
-                };
-
-                listCell.setOnDragDetected( ( MouseEvent event ) ->
-                {
-                    System.out.println( "listcell setOnDragDetected" );
-                    Dragboard db = listCell.startDragAndDrop( TransferMode.COPY );
-                    ClipboardContent content = new ClipboardContent();
-                    content.putString( listCell.getItem() );
-                    db.setContent( content );
-                    event.consume();
-                } );
-
-                listCell.setOnDragOver( ( DragEvent event ) ->
-                {
-                    System.out.println("POR FAVOR");
-                    Dragboard db = event.getDragboard();
-                    if ( db.hasString() )
-                    {
-                        event.acceptTransferModes( TransferMode.COPY_OR_MOVE );
-                    }
-                    event.consume();
-                } );
-
-                listCell.setOnDragDropped( ( DragEvent event ) ->
-                {
-                    System.out.println( "listCell.setOnDragDropped" );
-                    Dragboard db = event.getDragboard();
-                    boolean success = false;
-                    if ( db.hasString() )
-                    {
-                        System.out.println( "Dropped: " + db.getString() );
-                        targetList.add(db.getString());
-                        success = true;
-                    }
-                    event.setDropCompleted( success );
-                    event.consume();
-                } );
-
-                System.out.println("TESTE");
-
-                return listCell;
-            }
-        } );
-    }
+//    public void ListViewDragAndDrop(ListView<String> listView, ListView<String> playListView){
+//        playlistListView.setItems(targetList);
+//        //playListView = new ListView<>(targetList);
+//        //arrasta e coloca items da musicList na playlistListView
+//        musicList.setCellFactory( new Callback<ListView<String>, ListCell<String>>()
+//        {
+//            @Override
+//            public ListCell<String> call( ListView<String> param )
+//            {
+//                ListCell<String> listCell = new ListCell<String>()
+//                {
+//                    @Override
+//                    protected void updateItem( String item, boolean empty )
+//                    {
+//                        super.updateItem( item, empty );
+//                        setText( item );
+//                    }
+//                };
+//
+//                listCell.setOnDragDetected( ( MouseEvent event ) ->
+//                {
+//                    System.out.println( "listcell setOnDragDetected" );
+//                    Dragboard db = listCell.startDragAndDrop( TransferMode.COPY );
+//                    ClipboardContent content = new ClipboardContent();
+//                    content.putString( listCell.getItem() );
+//                    db.setContent( content );
+//                    event.consume();
+//                } );
+//
+//                listCell.setOnDragOver( ( DragEvent event ) ->
+//                {
+//                    System.out.println("POR FAVOR");
+//                    Dragboard db = event.getDragboard();
+//                    if ( db.hasString() )
+//                    {
+//                        event.acceptTransferModes( TransferMode.COPY_OR_MOVE );
+//                    }
+//                    event.consume();
+//                } );
+//
+//                listCell.setOnDragDropped( ( DragEvent event ) ->
+//                {
+//                    System.out.println( "listCell.setOnDragDropped" );
+//                    Dragboard db = event.getDragboard();
+//                    boolean success = false;
+//                    if ( db.hasString() )
+//                    {
+//                        System.out.println( "Dropped: " + db.getString() );
+//                        targetList.add(db.getString());
+//                        success = true;
+//                    }
+//                    event.setDropCompleted( success );
+//                    event.consume();
+//                } );
+//
+//                System.out.println("TESTE");
+//
+//                return listCell;
+//            }
+//        } );
+//    }
     private void handleMouseClicked(MouseEvent event) {
         Node node = event.getPickResult().getIntersectedNode();
         // Accept clicks only on node cells, and not on empty spaces of the TreeView
@@ -406,12 +399,12 @@ public class MainPageController implements Initializable {
             stopAndPlay(newFile);
         });
         //TESTE
-        playlistListView.getSelectionModel().selectedItemProperty().addListener((observable, oldFile, newFile) -> {
-            stopAndPlay(newFile);
-        });
+//        playlistListView.getSelectionModel().selectedItemProperty().addListener((observable, oldFile, newFile) -> {
+//            stopAndPlay(newFile);
+//        });
         //treeViewPlaylist.getSelectionModel().selectedItemProperty().addListener((observable, old F ));
         //TESTE
-        ListViewDragAndDrop(musicList, playlistListView);
+//        ListViewDragAndDrop(musicList, playlistListView);
 
         EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
             handleMouseClicked(event);

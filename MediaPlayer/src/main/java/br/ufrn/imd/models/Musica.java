@@ -2,15 +2,15 @@ package br.ufrn.imd.models;
 
 public class Musica{
     private int id;
+    private Usuario dono;
     private String titulo;
-    private String artista;
     private double duracao;
     private String caminho;
 
-    public Musica(int id, String titulo, String artista, double duracao, String caminho) {
+    public Musica(int id, Usuario dono, String titulo, double duracao, String caminho) {
         this.id = id;
+        this.dono = dono;
         this.titulo = titulo;
-        this.artista = artista;
         this.duracao = duracao;
         this.caminho = caminho;
     }
@@ -23,20 +23,20 @@ public class Musica{
         this.id = id;
     }
 
+    public Usuario getDono() {
+        return dono;
+    }
+
+    public void setDono(Usuario dono) {
+        this.dono = dono;
+    }
+
     public String getTitulo() {
         return titulo;
     }
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    public String getArtista() {
-        return artista;
-    }
-
-    public void setArtista(String artista) {
-        this.artista = artista;
     }
 
     public double getDuracao() {

@@ -92,6 +92,35 @@ public class UsuarioDAO implements DAOI<Usuario>{
     }
 
     /**
+     * Método para obter um usuário pelo Email no banco de dados.
+     *
+     * @param mail O Email do usuário a ser recuperado.
+     * @return Um objeto Usuario ou UsuarioVIP se encontrado, ou null se não encontrado.
+     */
+    public Usuario getByEmail(String mail){
+        String sql = "SELECT * FROM usuarios WHERE email = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)){
+            stmt.setString(1, mail);
+            ResultSet usuario = stmt.executeQuery();
+            while (usuario.next()){
+                int idUsuario = usuario.getInt("usuario_id");
+                String username = usuario.getString("username");
+                String email = usuario.getString("email");
+                String senha = usuario.getString("senha");
+                int isVIP = usuario.getInt("vip");
+                if (isVIP == 0){
+                    return new Usuario(idUsuario, username, email, senha);
+                } else {
+                    return new UsuarioVIP(idUsuario, username, email, senha, 1);
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * Método para obter todos os usuários do banco de dados.
      *
      * @return Uma lista de objetos Usuario.

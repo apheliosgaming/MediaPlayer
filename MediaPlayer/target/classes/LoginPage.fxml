@@ -11,6 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.controllers.LoginController">
+
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #9870FC;" BorderPane.alignment="CENTER">
          <children>
@@ -29,7 +30,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="121.0" prefHeight="17.0" prefWidth="219.0" text="asjdkajsdl">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="121.0" prefHeight="17.0" prefWidth="219.0" text="Listen to music">
                <font>
                   <Font size="24.0" />
                </font>
@@ -53,7 +54,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="161.0" prefHeight="20.0" prefWidth="79.0" text="Username">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="161.0" prefHeight="20.0" prefWidth="79.0" text="Email">
                <font>
                   <Font size="14.0" />
                </font>

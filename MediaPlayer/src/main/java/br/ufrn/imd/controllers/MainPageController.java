@@ -131,20 +131,21 @@ public class MainPageController implements Initializable {
             items.add(musica.getCaminho());
         }
 
-        PlaylistDAO pdao = new PlaylistDAO();
-        List<Playlist> playlistsDoUsuario = pdao.getAllUserPlaylist((UsuarioVIP) usuario);
-        if (!playlistsDoUsuario.isEmpty()){
-            if (root == null) {
-                root = new TreeItem<>("Playlists");
-                treeViewPlaylist.setRoot(root);
-            }
-            treeViewPlaylist.setEditable( true );
-            for (Playlist playlist : playlistsDoUsuario){
-                TreeItem<String> newPlaylist = new TreeItem<> (playlist.getNome());
-                root.getChildren().addAll(newPlaylist);
+        if (usuario instanceof UsuarioVIP){
+            PlaylistDAO pdao = new PlaylistDAO();
+            List<Playlist> playlistsDoUsuario = pdao.getAllUserPlaylist((UsuarioVIP) usuario);
+            if (!playlistsDoUsuario.isEmpty()){
+                if (root == null) {
+                    root = new TreeItem<>("Playlists");
+                    treeViewPlaylist.setRoot(root);
+                }
+                treeViewPlaylist.setEditable( true );
+                for (Playlist playlist : playlistsDoUsuario){
+                    TreeItem<String> newPlaylist = new TreeItem<> (playlist.getNome());
+                    root.getChildren().addAll(newPlaylist);
+                }
             }
         }
-
     }
 
     public void progressSliderOnAction(){

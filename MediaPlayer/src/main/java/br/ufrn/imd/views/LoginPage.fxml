@@ -17,7 +17,7 @@
          <children>
             <ImageView fx:id="GuyHeadphonesLogin" fitHeight="224.0" fitWidth="211.0" layoutX="12.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../util_RESOURCES/01AfroManPlatingGuitarAccoustic.png" />
+                  <Image url="@util/01AfroManPlatingGuitarAccoustic.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="86.0" prefHeight="17.0" prefWidth="219.0" text="Media Player">
@@ -30,14 +30,14 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="121.0" prefHeight="17.0" prefWidth="219.0" text="asjdkajsdl">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="121.0" prefHeight="17.0" prefWidth="219.0" text="Listen to music">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
             <ImageView fx:id="IconHeadPhone" fitHeight="19.0" fitWidth="19.0" layoutX="15.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../util_RESOURCES/Vector.png" />
+                  <Image url="@util/Vector.png" />
                </image>
             </ImageView>
          </children>
@@ -54,7 +54,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="161.0" prefHeight="20.0" prefWidth="79.0" text="Username">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="161.0" prefHeight="20.0" prefWidth="79.0" text="Email">
                <font>
                   <Font size="14.0" />
                </font>

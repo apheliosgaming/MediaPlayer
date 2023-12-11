@@ -179,4 +179,33 @@ public class MusicaDAO implements DAOI<Musica> {
         }
         return musicas;
     }
+
+    /**
+     * Método para obter uma musica pelo titulo no banco de dados.
+     *
+     * @param tituloBusca O titulo da musica a ser recuperado.
+     * @return Um objeto Usuario ou UsuarioVIP se encontrado, ou null se não encontrado.
+     */
+    public Musica getByTitulo(String tituloBusca){
+        String sql = "SELECT * FROM musicas WHERE titulo = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)){
+            stmt.setString(1, tituloBusca);
+            ResultSet resultado = stmt.executeQuery();
+            UsuarioDAO udao = new UsuarioDAO();
+            while (resultado.next()){
+                int idMusica = resultado.getInt("musica_id");
+                String titulo = resultado.getString("titulo");
+                int idDono = resultado.getInt("dono");
+                double duracao = resultado.getDouble("duracao");
+                String caminho = resultado.getString("caminho");
+
+                Usuario dono = udao.getById(idDono);
+
+                return new Musica(idMusica, dono, titulo, duracao, caminho);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -390,6 +390,16 @@ public class MainPageController implements Initializable {
                     {
                         System.out.println( "Dropped: " + db.getString() );
                         targetList.add(db.getString());
+                        PlaylistDAO pdao = new PlaylistDAO();
+                        MusicaDAO mdao = new MusicaDAO();
+
+
+                        //Pega musica no banco
+                        Musica musicaAdicionada = mdao.getByTitulo(db.getString());
+                        // Adiciona ela à playlist
+                        List<Playlist> playlists = pdao.getAllUserPlaylist((UsuarioVIP) usuario);
+                        pdao.addMusicToPlaylist(musicaAdicionada, playlists.get(0));
+
                         success = true;
                     }
                     event.setDropCompleted( success );

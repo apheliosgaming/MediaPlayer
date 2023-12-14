@@ -1,6 +1,4 @@
-//package br.ufrn.imd.controllers;
 package br.ufrn.imd.controllers;
-//package com.kensoftph.javafxmedia;
 
 import br.ufrn.imd.DAO.MusicaDAO;
 import br.ufrn.imd.DAO.PlaylistDAO;
@@ -118,7 +116,6 @@ public class MainPageController implements Initializable {
     private MediaPlayer mediaPlayer;
     private Media media;
     private String songName;
-    //private int atualIndex = -1;
 
     Usuario usuario;
 
@@ -221,8 +218,7 @@ public class MainPageController implements Initializable {
         fileChooser.setTitle("Selecione seu novo avatar");
         File file = fileChooser.showOpenDialog(null);
         if(file != null) {
-            path = file.toURI().toString();
-            System.out.println(path);
+            
         }
         else{
             System.out.println("Erro!");
@@ -260,8 +256,6 @@ public class MainPageController implements Initializable {
      */
     public void pauseMedia(ActionEvent event) {
         mediaPlayer.pause();
-        //imagePause.setImage(new Image("java/resources/util_RESOURCES/play(2).png"));
-
     }
 
     /**
@@ -402,7 +396,7 @@ public class MainPageController implements Initializable {
      */
     public void ListViewDragAndDrop(ListView<String> listView, ListView<String> playListView){
         playlistListView.setItems(targetList);
-        //playListView = new ListView<>(targetList);
+
         //arrasta e coloca items da musicList na playlistListView
         musicList.setCellFactory( new Callback<ListView<String>, ListCell<String>>()
         {
@@ -446,7 +440,7 @@ public class MainPageController implements Initializable {
                     boolean success = false;
                     if ( db.hasString() )
                     {
-                        //System.out.println( "Dropped: " + db.getString() );
+                        
                         targetList.add(db.getString());
                         PlaylistDAO pdao = new PlaylistDAO();
                         MusicaDAO mdao = new MusicaDAO();
@@ -475,7 +469,7 @@ public class MainPageController implements Initializable {
         Node node = event.getPickResult().getIntersectedNode();
         if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
             String name = (String) ((TreeItem)treeViewPlaylist.getSelectionModel().getSelectedItem()).getValue();
-            //System.out.println("Node click: " + name);
+        
             LabelPlaylist.setText(name);
         }
     }
@@ -504,7 +498,7 @@ public class MainPageController implements Initializable {
         musicList.getSelectionModel().selectedItemProperty().addListener((observable, oldFile, newFile) -> {
             stopAndPlay(newFile);
         });
-        //TESTE
+        
         playlistListView.getSelectionModel().selectedItemProperty().addListener((observable, oldFile, newFile) -> {
             stopAndPlay(newFile);
         });
@@ -516,83 +510,6 @@ public class MainPageController implements Initializable {
         };
 
         treeViewPlaylist.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle);
-/*
-        playlistListView.setItems(targetList);
-        //playListView = new ListView<>(targetList);
-        //arrasta e coloca items da musicList na playlistListView
-        musicList.setCellFactory( new Callback<ListView<String>, ListCell<String>>()
-        {
-            @Override
-            public ListCell<String> call( ListView<String> param )
-            {
-                ListCell<String> listCell = new ListCell<String>()
-                {
-                    @Override
-                    protected void updateItem( String item, boolean empty )
-                    {
-                        super.updateItem( item, empty );
-                        setText( item );
-                    }
-                };
 
-                listCell.setOnDragDetected( ( MouseEvent event ) ->
-                {
-                    System.out.println( "listcell setOnDragDetected" );
-                    Dragboard db = listCell.startDragAndDrop( TransferMode.COPY );
-                    ClipboardContent content = new ClipboardContent();
-                    content.putString( listCell.getItem() );
-                    db.setContent( content );
-                    event.consume();
-                } );
-                return listCell;
-            }
-        } );
-
-        playlistListView.setCellFactory( new Callback<ListView<String>, ListCell<String>>()
-        {
-            @Override
-            public ListCell<String> call( ListView<String> param )
-            {
-                ListCell<String> listCell2 = new ListCell<String>()
-                {
-                    @Override
-                    protected void updateItem( String item, boolean empty )
-                    {
-                        super.updateItem( item, empty );
-                        setText( item );
-                    }
-                };
-
-                listCell2.setOnDragOver( ( DragEvent event ) ->
-                {
-                    System.out.println("POR FAVOR");
-                    Dragboard db = event.getDragboard();
-                    if ( db.hasString() )
-                    {
-                        event.acceptTransferModes( TransferMode.COPY_OR_MOVE );
-                    }
-                    event.consume();
-                } );
-                listCell2.setOnDragDropped( ( DragEvent event ) ->
-                {
-                    System.out.println( "listCell.setOnDragDropped" );
-                    Dragboard db = event.getDragboard();
-                    boolean success = false;
-                    if ( db.hasString() )
-                    {
-                        System.out.println( "Dropped: " + db.getString() );
-                        targetList.add(db.getString());
-                        success = true;
-                    }
-                    event.setDropCompleted( success );
-                    event.consume();
-                } );
-
-                System.out.println("TESTEE");
-
-                return listCell2;
-            }
-        } );
-*/
     }
 }

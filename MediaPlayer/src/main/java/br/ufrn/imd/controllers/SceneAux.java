@@ -12,8 +12,19 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * Classe utilitária para auxiliar na transição entre cenas (páginas) da aplicação.
+ */
 public class SceneAux {
 
+    /**
+     * Método para trocar de cena.
+     *
+     * @param event      O evento de ação que desencadeou a troca de cena.
+     * @param fxmlFile   O arquivo FXML da cena de destino.
+     * @param title      O título da nova cena.
+     * @param usuario    O usuário associado à cena (pode ser nulo).
+     */
     public static void changeScene(ActionEvent event, String fxmlFile, String title, Usuario usuario){
         Parent root = null;
 
@@ -39,60 +50,4 @@ public class SceneAux {
         stage.setScene(new Scene(root, 600, 400));
         stage.show();
     }
-
-//    public static void logInUser(ActionEvent actionEvent, String username, String senha){
-//        Connection connection = null;
-//        PreparedStatement preparedStatement = null;
-//        ResultSet resultSet = null;
-//
-//        try {
-//            connection = DriverManager.getConnection("jdbc:sqlite:mediaplayer.db");
-//            preparedStatement = connection.prepareStatement("SELECT senha FROM usuarios WHERE usuarios = ?");
-//            preparedStatement.setString(1, username);
-//            resultSet = preparedStatement.executeQuery();
-//
-//            if (!resultSet.isBeforeFirst()) {
-//                System.out.println("Usuário não encontrado na db.");
-//                Alert alert = new Alert(Alert.AlertType.ERROR);
-//                alert.setContentText("Usuário ou senha incorretos.");
-//                alert.show();
-//            }
-//            else{
-//                while(resultSet.next()) {
-//                    String userPassword = resultSet.getString("senha");
-//                    if(userPassword.equals(senha)) {
-//                        changeScene(actionEvent, "/MainPage.fxml", "Media Player", username);
-//                    } else{
-//                        Alert alert = new Alert(Alert.AlertType.ERROR);
-//                        alert.setContentText("Usuário ou senha incorretos.");
-//                        alert.show();
-//                    }
-//                }
-//            }
-//        } catch (SQLException s){
-//            s.printStackTrace();
-//        } finally {
-//            if(resultSet != null){
-//                try {
-//                    resultSet.close();
-//                } catch (SQLException s){
-//                    s.printStackTrace();
-//                }
-//            }
-//            if(preparedStatement != null){
-//                try{
-//                    preparedStatement.close();
-//                } catch (SQLException s){
-//                    s.printStackTrace();
-//                }
-//            }
-//            if(connection != null){
-//                try{
-//                    connection.close();
-//                } catch (SQLException s){
-//                    s.printStackTrace();
-//                }
-//            }
-//        }
-//    }
 }

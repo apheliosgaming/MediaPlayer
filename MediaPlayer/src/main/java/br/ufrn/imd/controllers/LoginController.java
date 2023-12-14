@@ -22,6 +22,10 @@ import java.util.ResourceBundle;
 
 //import java.awt.event.ActionEvent;
 
+/**
+ * Controlador da interface de login da aplicação.
+ * Responsável por gerenciar as ações e eventos associados aos elementos da interface.
+ */
 public class LoginController implements Initializable {
 
     @FXML
@@ -36,6 +40,11 @@ public class LoginController implements Initializable {
     @FXML
     private Label WarningTextLogin;
 
+    /**
+     * Ação executada quando o botão de confirmação é pressionado.
+     * Autentica o usuário e direciona para a página principal se as credenciais estiverem corretas.
+     * Exibe uma mensagem de erro se as credenciais estiverem incorretas.
+     */
     public void ConfirmButtonOnAction(){
         if(!usernameField.getText().isBlank() && !passwordField.getText().isBlank()){
             String emailUsuario = usernameField.getText();
@@ -44,7 +53,6 @@ public class LoginController implements Initializable {
                 public void handle(ActionEvent actionEvent) {
                     UsuarioDAO udao = new UsuarioDAO();
                     Usuario usuario = udao.getByEmail(emailUsuario);
-                    System.out.println(usuario.getUsername());
                     if (udao.autenticar(usernameField.getText(), passwordField.getText())){
                         SceneAux.changeScene(actionEvent, "/MainPage.fxml", "Media Player", usuario);
                     }
@@ -59,9 +67,6 @@ public class LoginController implements Initializable {
         else{
             WarningTextLogin.setText("Insira um usuário e senha.");
         }
-    }
-    public void validaLogin(){
-        
     }
 
     @FXML
@@ -78,6 +83,12 @@ public class LoginController implements Initializable {
 
     }
 
+    /**
+     * Ação executada quando o botão de registro é pressionado.
+     * Direciona para a página de registro.
+     *
+     * @param event O evento de ação que desencadeou a chamada do método.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         RegisterButton.setOnAction(new EventHandler<ActionEvent>() {

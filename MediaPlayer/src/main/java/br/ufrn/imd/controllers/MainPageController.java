@@ -41,8 +41,11 @@ import java.io.File;
 
 import java.util.*;
 
+/**
+ * Classe controladora da interface principal da aplicação de Media Player.
+ * Responsável por gerenciar as ações e eventos associados aos elementos da interface.
+ */
 public class MainPageController implements Initializable {
-
 
     @FXML
     private Button addDirectory;
@@ -148,6 +151,10 @@ public class MainPageController implements Initializable {
         }
     }
 
+    /**
+     * Configura o controle deslizante de progresso e seus eventos associados.
+     * Atualiza a posição da barra de progresso durante a reprodução da mídia.
+     */
     public void progressSliderOnAction(){
         mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
             @Override
@@ -177,8 +184,11 @@ public class MainPageController implements Initializable {
         });
     }
 
-
-
+    /**
+     * Altera a velocidade de reprodução do media player com base na escolha do usuário.
+     *
+     * @param event O evento de ação que desencadeou a chamada do método.
+     */
     public void changeSpeed(ActionEvent event) {
         String velocidade = speedBox.getSelectionModel().getSelectedItem().toString();
         if(Objects.equals(velocidade, "50%")){
@@ -201,6 +211,10 @@ public class MainPageController implements Initializable {
         }
     }
 
+    /**
+     * Ação executada quando o botão "Muda Avatar" é pressionado.
+     * Atualmente comentado para possível implementação futura.
+     */
     public void MudaAvatarOnAction(){
         /*
         FileChooser fileChooser = new FileChooser();
@@ -216,7 +230,12 @@ public class MainPageController implements Initializable {
         */
     }
 
-
+    /**
+     * Ação executada quando o botão de avançar para a próxima mídia é pressionado.
+     * Avança para a próxima música na lista de reprodução, se disponível.
+     *
+     * @param event O evento de ação que desencadeou a chamada do método.
+     */
     public void nextMedia(ActionEvent event) {
         int indexAtual = musicList.getSelectionModel().getSelectedIndex();
         if (indexAtual < musicList.getHeight() - 1) {
@@ -224,31 +243,58 @@ public class MainPageController implements Initializable {
         }
     }
 
-
+    /**
+     * Inicia a reprodução da mídia selecionada na lista de reprodução.
+     *
+     * @param event O evento de ação que desencadeou a chamada do método.
+     */
     public void playMedia(ActionEvent event) {
         //progressSliderOnAction();
         mediaPlayer.play();
     }
+
+    /**
+     * Pausa a reprodução da mídia atual.
+     *
+     * @param event O evento de ação que desencadeou a chamada do método.
+     */
     public void pauseMedia(ActionEvent event) {
         mediaPlayer.pause();
         //imagePause.setImage(new Image("java/resources/util_RESOURCES/play(2).png"));
 
     }
 
+    /**
+     * Ação executada quando o botão de retrocesso para a mídia anterior é pressionado.
+     * Retrocede para a mídia anterior na lista de reprodução, se disponível.
+     *
+     * @param event O evento de ação que desencadeou a chamada do método.
+     */
     public void previousMedia(ActionEvent event) {
         int indexAtual = musicList.getSelectionModel().getSelectedIndex();
         if(indexAtual > 0){
             musicList.getSelectionModel().select(indexAtual - 1);
         }
     }
+
+    /**
+     * Inicia a configuração do temporizador para atualizar a barra de progresso.
+     */
     public void beginTimer(){
-
+        // TODO
     }
 
+    /**
+     * Cancela a execução do temporizador.
+     */
     public void cancelTimer(){
-
+        // TODO
     }
 
+    /**
+     * Adiciona um diretório de músicas à lista de reprodução.
+     * Permite ao usuário escolher um diretório e adiciona todas as músicas encontradas.
+     */
     public void AddDirectoryMethod(){
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Selecione o diretório");
@@ -259,7 +305,6 @@ public class MainPageController implements Initializable {
             File[] files = directory.listFiles();
             if(files != null){
                 for(File file : files) {
-                    //System.out.println(file.toURI().toString());
                     path = file.toURI().toString();
                     String titulo = file.getName();
                     Musica musica = new Musica(0, usuario, titulo, 0, path);
@@ -270,6 +315,12 @@ public class MainPageController implements Initializable {
         }
     }
 
+    /**
+     * Adiciona um arquivo de música à lista de reprodução.
+     * Permite ao usuário escolher um arquivo de música e adiciona à lista de reprodução.
+     *
+     * @param actionEvent O evento de ação que desencadeou a chamada do método.
+     */
     @FXML
     public void AddFileMethod(ActionEvent actionEvent){
         FileChooser fileChooser = new FileChooser();
@@ -289,26 +340,35 @@ public class MainPageController implements Initializable {
             alert.show();
         }
     }
+
+    /**
+     * Inicia ou reinicia a reprodução da mídia especificada.
+     * Se uma mídia já estiver sendo reproduzida, ela será interrompida antes da nova reprodução.
+     *
+     * @param newFile O caminho do novo arquivo de mídia.
+     */
     public void stopAndPlay(String newFile){
         if(mediaPlayer != null){
             mediaPlayer.stop();
         }
         if(newFile != null){
-            //media = new Media(newFile);
             media = new Media(newFile);
             mediaPlayer = new MediaPlayer(media);
             progressSliderOnAction();
             mediaPlayer.play();
-            //TESTE
         }
     }
+
+    /**
+     * Cria uma nova playlist e adiciona ao TreeView.
+     * Apenas usuários VIP podem criar playlists.
+     */
     public void createPlaylistOnAction(){
         if (usuario instanceof  UsuarioVIP){
             ListView<String> novaListView = new ListView<>();
 
             TextInputDialog td = new TextInputDialog("Playlist1");
 
-            // setHeaderText
             td.setHeaderText("Insira um nome na playlist");
             td.showAndWait();
 
@@ -320,20 +380,12 @@ public class MainPageController implements Initializable {
             treeViewPlaylist.setEditable( true );
             TreeItem<String> newPlaylist = new TreeItem<> (td.getEditor().getText());
 
-            //LabelPlaylist.setText(td.getEditor().getText());
-
-            //TreeItem<String> folha = new TreeItem<> ("DUO");
-
             PlaylistDAO pdao = new PlaylistDAO();
             Playlist playlist = new Playlist(0, td.getEditor().getText(), (UsuarioVIP) usuario);
             pdao.create(playlist);
             root.getChildren().addAll(newPlaylist);
 
-            //ListView<String> novaListView = new ListView<>(targetList);
-
             novaListView = playlistListView;
-
-            //newPlaylist.getChildren().addAll(folha);
 
         } else {
             System.out.println("Apenas usuarios VIP podem criar playlists");
@@ -342,6 +394,12 @@ public class MainPageController implements Initializable {
     }
     ObservableList<String> targetList = FXCollections.observableArrayList();
 
+    /**
+     * Configura a funcionalidade de arrastar e soltar entre listas.
+     *
+     * @param listView     A lista de origem do qual os itens podem ser arrastados.
+     * @param playListView A lista de destino para onde os itens podem ser soltos.
+     */
     public void ListViewDragAndDrop(ListView<String> listView, ListView<String> playListView){
         playlistListView.setItems(targetList);
         //playListView = new ListView<>(targetList);
@@ -363,7 +421,7 @@ public class MainPageController implements Initializable {
 
                 listCell.setOnDragDetected( ( MouseEvent event ) ->
                 {
-                    System.out.println( "listcell setOnDragDetected" );
+                    //System.out.println( "listcell setOnDragDetected" );
                     Dragboard db = listCell.startDragAndDrop( TransferMode.COPY );
                     ClipboardContent content = new ClipboardContent();
                     content.putString( listCell.getItem() );
@@ -373,7 +431,6 @@ public class MainPageController implements Initializable {
 
                 listCell.setOnDragOver( ( DragEvent event ) ->
                 {
-                    System.out.println("POR FAVOR");
                     Dragboard db = event.getDragboard();
                     if ( db.hasString() )
                     {
@@ -384,20 +441,17 @@ public class MainPageController implements Initializable {
 
                 listCell.setOnDragDropped( ( DragEvent event ) ->
                 {
-                    System.out.println( "listCell.setOnDragDropped" );
+                    //System.out.println( "listCell.setOnDragDropped" );
                     Dragboard db = event.getDragboard();
                     boolean success = false;
                     if ( db.hasString() )
                     {
-                        System.out.println( "Dropped: " + db.getString() );
+                        //System.out.println( "Dropped: " + db.getString() );
                         targetList.add(db.getString());
                         PlaylistDAO pdao = new PlaylistDAO();
                         MusicaDAO mdao = new MusicaDAO();
 
-
-                        //Pega musica no banco
                         Musica musicaAdicionada = mdao.getByTitulo(db.getString());
-                        // Adiciona ela à playlist
                         List<Playlist> playlists = pdao.getAllUserPlaylist((UsuarioVIP) usuario);
                         pdao.addMusicToPlaylist(musicaAdicionada, playlists.get(0));
 
@@ -406,23 +460,32 @@ public class MainPageController implements Initializable {
                     event.setDropCompleted( success );
                     event.consume();
                 } );
-
-                System.out.println("TESTE");
-
                 return listCell;
             }
         } );
     }
+
+    /**
+     * Manipula o evento de clique do mouse no TreeViewPlaylist.
+     * Atualiza o rótulo LabelPlaylist com o nome da playlist selecionada.
+     *
+     * @param event O evento de clique do mouse.
+     */
     private void handleMouseClicked(MouseEvent event) {
         Node node = event.getPickResult().getIntersectedNode();
-        // Accept clicks only on node cells, and not on empty spaces of the TreeView
         if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
             String name = (String) ((TreeItem)treeViewPlaylist.getSelectionModel().getSelectedItem()).getValue();
-            System.out.println("Node click: " + name);
+            //System.out.println("Node click: " + name);
             LabelPlaylist.setText(name);
         }
     }
 
+    /**
+     * Inicializa a interface do controlador.
+     *
+     * @param url             A URL usada para localizar o arquivo FXML.
+     * @param resourceBundle O pacote de recursos para localizar o arquivo FXML.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> list = FXCollections.observableArrayList(Integer.toString(50) + "%",
@@ -445,8 +508,7 @@ public class MainPageController implements Initializable {
         playlistListView.getSelectionModel().selectedItemProperty().addListener((observable, oldFile, newFile) -> {
             stopAndPlay(newFile);
         });
-        //treeViewPlaylist.getSelectionModel().selectedItemProperty().addListener((observable, old F ));
-        //TESTE
+
         ListViewDragAndDrop(musicList, playlistListView);
 
         EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
@@ -532,6 +594,5 @@ public class MainPageController implements Initializable {
             }
         } );
 */
-
     }
 }

@@ -51,6 +51,10 @@ public class RegistrationController implements Initializable {
     @FXML
     private TextField usernameField;
 
+    /**
+     * Controlador da interface de registro da aplicação.
+     * Responsável por gerenciar as ações e eventos associados aos elementos da interface.
+     */
     @FXML
     public void ConfirmButtonOnAction() {
         if(!usernameField.getText().isBlank() && !passwordField.getText().isBlank() && !emailField.getText().isBlank()){
@@ -70,7 +74,10 @@ public class RegistrationController implements Initializable {
         }
     }
 
-
+    /**
+     * Ação executada quando o botão de confirmação é pressionado.
+     * Cria um novo usuário com as informações fornecidas e exibe uma mensagem de confirmação ou erro.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         LoginButton.setOnAction(new EventHandler<ActionEvent>() {

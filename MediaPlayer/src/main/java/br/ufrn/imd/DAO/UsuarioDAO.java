@@ -82,7 +82,7 @@ public class UsuarioDAO implements DAOI<Usuario>{
                 if (isVIP == 0){
                     return new Usuario(id, username, email, senha);
                 } else {
-                    return new UsuarioVIP(id, username, email, senha, 1);
+                    return new UsuarioVIP(id, username, email, senha);
                 }
             }
         } catch (SQLException e){
@@ -111,7 +111,7 @@ public class UsuarioDAO implements DAOI<Usuario>{
                 if (isVIP == 0){
                     return new Usuario(idUsuario, username, email, senha);
                 } else {
-                    return new UsuarioVIP(idUsuario, username, email, senha, 1);
+                    return new UsuarioVIP(idUsuario, username, email, senha);
                 }
             }
         } catch (SQLException e){
@@ -140,7 +140,7 @@ public class UsuarioDAO implements DAOI<Usuario>{
                 if (isVIP == 0){
                     usuarios.add(new Usuario(id, username, email, senha));
                 } else {
-                    usuarios.add(new UsuarioVIP(id, username, email, senha, 1));
+                    usuarios.add(new UsuarioVIP(id, username, email, senha));
                 }
             }
         } catch (SQLException e){

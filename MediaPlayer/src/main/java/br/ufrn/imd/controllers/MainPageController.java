@@ -59,10 +59,6 @@ public class MainPageController implements Initializable {
     @FXML
     private Label LabelPlaylist;
 
-
-    @FXML
-    private Rectangle buttonControlMusic;
-
     @FXML
     private Button buttonForward;
 

@@ -28,7 +28,7 @@ public class SceneAux {
     public static void changeScene(ActionEvent event, String fxmlFile, String title, Usuario usuario){
         Parent root = null;
 
-        if(usuario.getUsername() != null){
+        if(usuario != null){
             try {
                 FXMLLoader loader = new FXMLLoader(SceneAux.class.getResource(fxmlFile));
                 root = loader.load();

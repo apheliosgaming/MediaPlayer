@@ -2,6 +2,7 @@ package br.ufrn.imd.controllers;
 
 import br.ufrn.imd.DAO.UsuarioDAO;
 import br.ufrn.imd.models.Usuario;
+import br.ufrn.imd.models.UsuarioVIP;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,11 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
@@ -61,8 +59,8 @@ public class RegistrationController implements Initializable {
     @FXML
     public void ConfirmButtonOnAction() {
         if(!usernameField.getText().isBlank() && !passwordField.getText().isBlank() && !emailField.getText().isBlank()){
+            UsuarioDAO udao = new UsuarioDAO();
             if(VIPChecker.isSelected()){
-                UsuarioDAO usuario = new UsuarioDAO();
                 UsuarioVIP usuarioVIP = new UsuarioVIP(
                         0,
                         usernameField.getText(),
@@ -73,7 +71,6 @@ public class RegistrationController implements Initializable {
                 WarningTextLogin.setText("Você se registrou!");
             }
             else {
-                UsuarioDAO udao = new UsuarioDAO();
                 Usuario usuario = new Usuario(
                         0,
                         usernameField.getText(),

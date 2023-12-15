@@ -39,6 +39,7 @@ public class LoginController implements Initializable {
 
     @FXML
     private Label WarningTextLogin;
+    private Usuario usuario;
 
     /**
      * Ação executada quando o botão de confirmação é pressionado.
@@ -94,7 +95,7 @@ public class LoginController implements Initializable {
         RegisterButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                SceneAux.changeScene(event, "/RegistrationPage.fxml", "Tela de Registro", null);
+                SceneAux.changeScene(event, "/RegistrationPage.fxml", "Tela de Registro", usuario);
             }
         });
     }

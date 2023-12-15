@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.controllers.MainPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kensoftph.javafxmedia.MainPageController">
    <center>
       <AnchorPane prefHeight="254.0" prefWidth="249.0" BorderPane.alignment="CENTER">
          <children>
@@ -39,17 +39,17 @@
          <children>
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="66.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@util/play(2).png" />
+                  <Image url="@../../../util_RESOURCES/play(2).png" />
                </image>
             </ImageView>
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="30.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@util/fastBackwardCircle.png" />
+                  <Image url="@../../../util_RESOURCES/fastBackwardCircle.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="136.0" layoutY="26.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@util/fastBackwardCircle.png" />
+                  <Image url="@../../../util_RESOURCES/fastBackwardCircle.png" />
                </image>
             </ImageView>
             <Button fx:id="buttonPlay" layoutX="71.0" layoutY="32.0" mnemonicParsing="false" onAction="#playMedia" prefHeight="25.0" prefWidth="26.0" style="-fx-background-color: transperent; -fx-cursor: hand;" />
@@ -59,7 +59,7 @@
             <Slider fx:id="volumeSlider" layoutX="182.0" layoutY="22.0" max="200.0" orientation="VERTICAL" prefHeight="49.0" prefWidth="14.0" value="100.0" />
             <ImageView fx:id="imagePause" fitHeight="36.0" fitWidth="36.0" layoutX="100.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@util/pause circle.png" />
+                  <Image url="@../../../util_RESOURCES/pause%20circle.png" />
                </image>
             </ImageView>
             <Button fx:id="pauseButton" layoutX="104.0" layoutY="30.0" mnemonicParsing="false" onAction="#pauseMedia" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
@@ -73,7 +73,7 @@
             <ImageView fitHeight="61.0" fitWidth="64.0" layoutX="30.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="19.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                <image>
-                  <Image url="@util/addplaylist(1).png" />
+                  <Image url="@../../../util_RESOURCES/addplaylist(1).png" />
                </image>
             </ImageView>
             <MenuBar layoutY="2.0">
@@ -107,7 +107,7 @@
             </Button>
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="19.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                <image>
-                  <Image url="@util/addplaylist(1).png" />
+                  <Image url="@../../../util_RESOURCES/addplaylist(1).png" />
                </image>
             </ImageView>
             <Label fx:id="welcomeLabel" layoutX="12.0" layoutY="34.0" prefHeight="49.0" prefWidth="166.0" text="Oi, username!">
@@ -118,7 +118,7 @@
             <Button fx:id="createPlaylist" layoutX="17.0" layoutY="248.0" mnemonicParsing="false" onAction="#createPlaylistOnAction" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="20.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@util/add collection.png" />
+                  <Image url="@../../../util_RESOURCES/add%20collection.png" />
                </image>
             </ImageView>
             <Button fx:id="createPlaylist" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="256.0" mnemonicParsing="false" onAction="#createPlaylistOnAction" prefHeight="39.0" prefWidth="156.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="New Playlist">
@@ -132,9 +132,9 @@
    <right>
       <AnchorPane prefHeight="200.0" prefWidth="151.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="142.0" layoutX="1.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="avatar" fitHeight="150.0" fitWidth="142.0" layoutX="1.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@util/AvatarUser.png" />
+                  <Image url="@../../../util_RESOURCES/AvatarUser.png" />
                </image>
             </ImageView>
             <Button fx:id="mudaAvatar" layoutX="25.0" layoutY="161.0" mnemonicParsing="false" onAction="#MudaAvatarOnAction" style="-fx-cursor: hand; -fx-background-color: #F6921E;" text="Change Avatar" />

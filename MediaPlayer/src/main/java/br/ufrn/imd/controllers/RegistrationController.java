@@ -51,6 +51,9 @@ public class RegistrationController implements Initializable {
     @FXML
     private TextField usernameField;
 
+    @FXML
+    private CheckBox VIPChecker;
+
     /**
      * Controlador da interface de registro da aplicação.
      * Responsável por gerenciar as ações e eventos associados aos elementos da interface.
@@ -58,16 +61,29 @@ public class RegistrationController implements Initializable {
     @FXML
     public void ConfirmButtonOnAction() {
         if(!usernameField.getText().isBlank() && !passwordField.getText().isBlank() && !emailField.getText().isBlank()){
-            UsuarioDAO udao = new UsuarioDAO();
-            Usuario usuario = new Usuario(
-                    0,
-                    usernameField.getText(),
-                    emailField.getText(),
-                    passwordField.getText()
-            );
-            udao.create(usuario);
+            if(VIPChecker.isSelected()){
+                UsuarioDAO usuario = new UsuarioDAO();
+                UsuarioVIP usuarioVIP = new UsuarioVIP(
+                        0,
+                        usernameField.getText(),
+                        emailField.getText(),
+                        passwordField.getText()
+                );
+                udao.create(usuarioVIP);
+                WarningTextLogin.setText("Você se registrou!");
+            }
+            else {
+                UsuarioDAO udao = new UsuarioDAO();
+                Usuario usuario = new Usuario(
+                        0,
+                        usernameField.getText(),
+                        emailField.getText(),
+                        passwordField.getText()
+                );
+                udao.create(usuario);
 
-            WarningTextLogin.setText("Você se registrou!");
+                WarningTextLogin.setText("Você se registrou!");
+            }
         }
         else{
             WarningTextLogin.setText("Preencha todos os componentes.");
@@ -97,3 +113,4 @@ public class RegistrationController implements Initializable {
         });
     }
 }
+

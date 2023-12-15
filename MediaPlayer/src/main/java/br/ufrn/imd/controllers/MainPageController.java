@@ -98,6 +98,12 @@ public class MainPageController implements Initializable {
     private TreeView treeViewPlaylist;
 
     @FXML
+    private Button becomeVIP;
+
+    @FXML
+    private ImageView avatar;
+
+    @FXML
     private ListView<String> playlistListView;
     private TreeItem<String> root;
 
@@ -210,20 +216,20 @@ public class MainPageController implements Initializable {
 
     /**
      * Ação executada quando o botão "Muda Avatar" é pressionado.
-     * Atualmente comentado para possível implementação futura.
      */
     public void MudaAvatarOnAction(){
-        /*
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Selecione seu novo avatar");
         File file = fileChooser.showOpenDialog(null);
         if(file != null) {
-            
+            path = file.toURI().toString();
+            Image novaImagem = new Image(path);
+            avatar.setImage(novaImagem);
         }
         else{
             System.out.println("Erro!");
         }
-        */
     }
 
     /**
@@ -386,6 +392,10 @@ public class MainPageController implements Initializable {
         }
 
     }
+    public void viraVIP(ActionEvent event) {
+
+    }
+
     ObservableList<String> targetList = FXCollections.observableArrayList();
 
     /**

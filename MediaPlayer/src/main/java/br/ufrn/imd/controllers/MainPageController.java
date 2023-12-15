@@ -276,21 +276,6 @@ public class MainPageController implements Initializable {
             musicList.getSelectionModel().select(indexAtual - 1);
         }
     }
-
-    /**
-     * Inicia a configuração do temporizador para atualizar a barra de progresso.
-     */
-    public void beginTimer(){
-        // TODO
-    }
-
-    /**
-     * Cancela a execução do temporizador.
-     */
-    public void cancelTimer(){
-        // TODO
-    }
-
     /**
      * Adiciona um diretório de músicas à lista de reprodução.
      * Permite ao usuário escolher um diretório e adiciona todas as músicas encontradas.
@@ -390,9 +375,6 @@ public class MainPageController implements Initializable {
         } else {
             System.out.println("Apenas usuarios VIP podem criar playlists");
         }
-
-    }
-    public void viraVIP(ActionEvent event) {
 
     }
 

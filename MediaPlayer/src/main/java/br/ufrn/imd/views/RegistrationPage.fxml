@@ -30,7 +30,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="121.0" prefHeight="17.0" prefWidth="217.0" text="escute músicas">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="121.0" prefHeight="17.0" prefWidth="217.0" text="Listen to music">
                <font>
                   <Font size="24.0" />
                </font>
